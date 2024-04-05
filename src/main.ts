@@ -4,13 +4,13 @@ import cors from "cors"
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use(cors())
-  // app.enableCors({
-  //   "origin": "https://effective-media-agency.netlify.app/",
-  //   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-  //   "preflightContinue": false,
-  //   "optionsSuccessStatus": 204
-  // })
+  app.enableCors({
+    origin: "https://effective-media-agency.netlify.app/",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ['Content-Type', 'Origin', 'X-Requested-With', 'Accept', 'Authorization'],
+    exposedHeaders: ['Authorization'],
+    credentials: true
+  })
 
   await app.listen(3020);
 }
