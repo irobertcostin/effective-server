@@ -17,15 +17,6 @@ export class ClientsController {
     }
 
 
-    // @Get(":name")
-    // async getClientByName(
-    //     @Param('name')
-    //     name: string
-    // ): Promise<Clients> {
-
-
-    //     return this.clientsService.findByName(name)
-    // }
 
 
     @Get(':id')
