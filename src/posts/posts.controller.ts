@@ -16,27 +16,20 @@ export class PostsController {
     @Get()
     async getAllPosts(
         @Query() query: ExpressQuery
-    ): Promise<Posts[]> {
-
+    ): Promise<FilterResponse> {
         const posts = await this.postsService.findAll(query)
-
         if (!posts) {
             throw new NotFoundException('No posts found')
         }
-
         return posts
-
-        // return this.postsService.findAll()
-
     }
 
-    @Get('/count')
+    @Get('count')
     async getPostsCount(): Promise<Number> {
         return this.postsService.getCount()
-
     }
 
-    @Post("/new")
+    @Post("new")
     async createPost(
         @Body()
         post: CreatePostsDto
@@ -44,13 +37,30 @@ export class PostsController {
         return this.postsService.create(post)
     }
 
-    @Post("/filter/categories")
+    @Post("filter/categories")
     async filterByCategories(
         @Body()
         categories: FilterCategories,
         @Query() query: ExpressQuery
     ): Promise<FilterResponse> {
         return this.postsService.filterCategories(categories?.categories, query)
+    }
+
+
+    @Get("search")
+    async searchByString(
+        @Query() query: ExpressQuery
+    ): Promise<FilterResponse> {
+
+        const posts = await this.postsService.searchInTitles(query)
+
+        if (!posts) {
+            throw new NotFoundException('No posts found')
+        }
+
+        return posts
+
+
     }
 
 
