@@ -17,8 +17,12 @@ import { ClientsModule } from './clients/clients.module';
     MongooseModule.forRoot(process.env.MONGO_URI),
     UsersModule,
     PostsModule,
-    ClientsModule],
+    ClientsModule
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+
+  ],
 })
 export class AppModule { }

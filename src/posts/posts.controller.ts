@@ -57,7 +57,6 @@ export class PostsController {
         if (!posts) {
             throw new NotFoundException('No posts found')
         }
-
         return posts
 
 
