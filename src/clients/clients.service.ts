@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Clients } from './schemas/clients.schema';
 import mongoose from 'mongoose';
-
+import { Status } from './schemas/clients.schema';
 @Injectable()
 export class ClientsService {
 
@@ -17,21 +17,19 @@ export class ClientsService {
         return clients
     }
 
-    // async findByName(name: string): Promise<Clients> {
-    //     const clients = await this.clientsModel.findOne({ where: { first_name: name } })
-    //     return clients
-    // }
+    async markClient(id: any): Promise<any> {
 
+        console.log(id);
+        const client = await this.clientsModel.findById(id)
 
-    async findCliendById(id: string): Promise<Clients> {
-
-        const res = await this.clientsModel.findById(id)
-
-        if (!res) {
+        if (!client) {
             throw new NotFoundException(`Object with ${id} could not be found`)
         }
 
-        return res;
+        client.status = Status.CONTACTED
+        await client.save();
+
+        return { message: "Modified successfully" };
 
     }
 
