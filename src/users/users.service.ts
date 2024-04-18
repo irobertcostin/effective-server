@@ -6,6 +6,9 @@ import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from "bcryptjs"
 import { LoginUserDto } from './dto/login.dto';
+import { Query } from "express-serve-static-core";
+import { GetUserDto } from './dto/getuser-dto';
+
 
 
 @Injectable()
@@ -79,6 +82,18 @@ export class UsersService {
         }
     }
 
+
+
+    async getUser(request: any): Promise<GetUserDto> {
+
+        const user: GetUserDto = {
+            first_name: request.first_name,
+            last_name: request.last_name,
+            username: request.username
+        }
+
+        return user
+    }
 
 
 
