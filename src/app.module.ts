@@ -6,6 +6,10 @@ import { PostsModule } from './posts/posts.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ClientsModule } from './clients/clients.module';
+import { UsersService } from './users/users.service';
+import { ClientsService } from './clients/clients.service';
+import { UsersController } from './users/users.controller';
+import { ClientsController } from './clients/clients.controller';
 
 
 @Module({
@@ -17,12 +21,10 @@ import { ClientsModule } from './clients/clients.module';
     MongooseModule.forRoot(process.env.MONGO_URI),
     UsersModule,
     PostsModule,
-    ClientsModule
+    ClientsModule,
   ],
   controllers: [AppController],
   providers: [
-    AppService,
-
-  ],
+    AppService],
 })
 export class AppModule { }
